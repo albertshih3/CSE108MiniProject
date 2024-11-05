@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard - ACME University</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>Welcome {{ current_user.display_name }}!</h1>
+            <a href="{{ url_for('logout') }}" class="btn">Sign out</a>
+        </header>
+        
+        <section class="courses">
+            <h2>Your Courses</h2>
+            {% for course in courses %}
+            <div class="course-section">
+                <h3>{{ course.name }}</h3>
+                <p>Time: {{ course.time }}</p>
+                <p>Students Enrolled: {{ course.enrollments|length }}/{{ course.capacity }}</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Grade</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for enrollment in course.enrollments %}
+                        <tr>
+                            <td>{{ enrollment.student.display_name }}</td>
+                            <td>{{ enrollment.grade if enrollment.grade else 'N/A' }}</td>
+                            <td>
+                                <form class="grade-form" method="POST" action="{{ url_for('update_grade', enrollment_id=enrollment.id) }}">
+                                    <input type="number" name="grade" value="{{ enrollment.grade }}" min="0" max="100">
+                                    <button type="submit">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+</body>
+</html>
