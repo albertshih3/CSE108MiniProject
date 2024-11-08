@@ -117,10 +117,10 @@ class AdminModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated and current_user.role == 'admin'
 
-admin = Admin(app, name='ACME University Admin', template_mode='bootstrap3')
-admin.add_view(AdminModelView(User, db.session))
-admin.add_view(AdminModelView(Course, db.session))
-admin.add_view(AdminModelView(Enrollment, db.session))
+admin = Admin(app, name='ACME University Admin', template_mode='bootstrap4')
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Course, db.session))
+admin.add_view(ModelView(Enrollment, db.session))
 
 def init_db():
     # Create users if they don't exist
