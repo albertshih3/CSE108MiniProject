@@ -3,17 +3,19 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background-color: #a0bce9;
 }
 
 .login-container {
     max-width: 400px;
     margin: 100px auto;
+    margin-top: 30%;
     padding: 20px;
-    background-color: white;
+    background-color: #CFD8E6;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    border: 2px solid black;
 }
 
 .form-group {
@@ -26,19 +28,22 @@ input {
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
+    border: 1px solid black;
+    font-size: 15px;
 }
 
 button {
-    background-color: #007bff;
+    background-color: #308fa4;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    border: 1px solid black;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #174c58;
 }
 
 .dashboard {
@@ -55,19 +60,21 @@ header {
     padding: 20px;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
+    border: 2px solid black;
 }
 
 .btn {
     text-decoration: none;
     color: white;
-    background-color: #dc3545;
+    background-color: #c52a3a;
     padding: 8px 15px;
     border-radius: 4px;
+    border: 1px solid black;
 }
 
 .btn:hover {
-    background-color: #c82333;
+    background-color: #861823;
 }
 
 table {
@@ -75,18 +82,24 @@ table {
     border-collapse: collapse;
     margin-bottom: 30px;
     background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid black;
 }
 
 th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    border: 1px solid black;
 }
 
 th {
-    background-color: #f8f9fa;
+    background-color: #a6c5ab;
     font-weight: bold;
+}
+
+td {
+    background-color: #e3efe5;
 }
 
 .alert {
@@ -97,12 +110,19 @@ th {
     border-radius: 4px;
 }
 
+#teacher-courses-title {
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 1.5);
+}
 .course-section {
     background-color: white;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid black;
 }
 
 .full {
