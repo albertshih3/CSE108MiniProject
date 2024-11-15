@@ -146,22 +146,6 @@ def update_grade(enrollment_id):
     
     return redirect(url_for('dashboard'))
 
-@app.route('/drop_class/<int:enrollment_id>', methods=['POST'])
-@login_required
-def drop_class(enrollment_id):
-    if current_user.role != 'student':
-        return redirect(url_for('dashboard'))
-    
-    enrollment = Enrollment.query.get_or_404(enrollment_id)
-    
-    if enrollment.student_id != current_user.id:
-        return redirect(url_for('dashboard'))
-    
-    db.session.delete(enrollment)
-    db.session.commit()
-    
-    return redirect(url_for('dashboard'))
-
 # Admin views
 class AdminModelView(ModelView):
     def is_accessible(self):

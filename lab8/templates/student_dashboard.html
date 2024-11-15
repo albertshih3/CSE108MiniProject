@@ -1,79 +1,90 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Student Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
     <div class="dashboard-header">
-        <h1>Welcome {{ current_user.display_name }}!</h1>
-        <a href="{{ url_for('logout') }}" class="btn">Sign out</a>
+      <h1>Welcome {{ current_user.display_name }}!</h1>
+      <a href="{{ url_for('logout') }}" class="btn">Sign out</a>
     </div>
 
     <div class="section courses">
-        <h2>Your Courses</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Course Name</th>
-                    <th>Teacher</th>
-                    <th>Time</th>
-                    <th>Students Enrolled</th>
-                    <th>Grade</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for enrollment in enrollments %}
-                <tr>
-                    <td>{{ enrollment.course.name }}</td>
-                    <td>{{ enrollment.course.teacher.display_name }}</td>
-                    <td>{{ enrollment.course.time }}</td>
-                    <td>{{ enrollment.course.enrollments|length }}/{{ enrollment.course.capacity }}</td>
-                    <td>{{ enrollment.grade if enrollment.grade else 'N/A' }}</td>
-                    <td>
-                        <form action="{{ url_for('drop_class', enrollment_id=enrollment.id) }}" method="POST">
-                            <button type="submit" class="btn-drop" onclick="return confirm('Are you sure you want to drop this class?')">Drop Class</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+      <h2>Your Courses</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Teacher</th>
+            <th>Time</th>
+            <th>Students Enrolled</th>
+            <th>Grade</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for enrollment in enrollments %}
+          <tr>
+            <td>{{ enrollment.course.name }}</td>
+            <td>{{ enrollment.course.teacher.display_name }}</td>
+            <td>{{ enrollment.course.time }}</td>
+            <td>
+              {{ enrollment.course.enrollments|length }}/{{
+              enrollment.course.capacity }}
+            </td>
+            <td>{{ enrollment.grade if enrollment.grade else 'N/A' }}</td>
+            <td>
+              <form
+                action="{{ url_for('drop_class', enrollment_id=enrollment.id) }}"
+                method="post"
+              >
+                <button type="submit">Drop Class</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
 
-        <h2>Available Courses</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Course Name</th>
-                    <th>Teacher</th>
-                    <th>Time</th>
-                    <th>Students Enrolled</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for course in courses %}
-                    {% if course.id not in enrollments|map(attribute='course_id')|list %}
-                    <tr>
-                        <td>{{ course.name }}</td>
-                        <td>{{ course.teacher.display_name }}</td>
-                        <td>{{ course.time }}</td>
-                        <td>{{ course.enrollments|length }}/{{ course.capacity }}</td>
-                        <td>
-                            {% if course.enrollments|length < course.capacity %}
-                                <form action="{{ url_for('enroll', course_id=course.id) }}" method="POST">
-                                    <button type="submit" class="btn-enroll">Add class</button>
-                                </form>
-                            {% else %}
-                                <span class="full">Full</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endif %}
-                {% endfor %}
-            </tbody>
-        </table>
+      <h2>Available Courses</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Teacher</th>
+            <th>Time</th>
+            <th>Students Enrolled</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in courses %} {% if course.id not in
+          enrollments|map(attribute='course_id')|list %}
+          <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.teacher.display_name }}</td>
+            <td>{{ course.time }}</td>
+            <td>{{ course.enrollments|length }}/{{ course.capacity }}</td>
+            <td>
+              {% if course.enrollments|length < course.capacity %}
+              <form
+                action="{{ url_for('enroll', course_id=course.id) }}"
+                method="POST"
+              >
+                <button type="submit" class="btn-enroll">Add class</button>
+              </form>
+              {% else %}
+              <span class="full">Full</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endif %} {% endfor %}
+        </tbody>
+      </table>
     </div>
-</body>
+  </body>
 </html>
