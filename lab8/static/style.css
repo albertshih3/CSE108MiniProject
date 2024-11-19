@@ -1,57 +1,52 @@
+/* static/style.css */ 
 body {
-    font-family: 'Roboto', sans-serif; 
+    font-family: Georgia, sans-serif;
     margin: 0;
     padding: 2%;
-    background-color: #f5f7fa; 
-    color: #333; 
+    background-color: #a0bce9;
 }
 
 .login-container {
     max-width: 400px;
-    margin: 100px auto;
-    padding: 25px;
-    background-color: #ffffff;
-    border-radius: 12px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #CFD8E6;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border: none;
+    border: 2px solid black;
 }
 
+
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 input {
     width: 100%;
-    padding: 12px;
+    padding: 8px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 4px;
     box-sizing: border-box;
-    font-size: 16px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-input:focus {
-    outline: none;
-    border-color: #007bff; 
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    border: 1px solid black;
+    font-size: 15px;
 }
 
 button {
-    background-color: #007bff; 
+    background-color: #308fa4;
     color: white;
-    padding: 12px 18px;
+    padding: 10px 15px;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease; 
+    border: 1px solid black;
 }
 
 button:hover {
-    background-color: #0056b3; 
-    transform: translateY(-3px); 
+    background-color: #174c58;
 }
 
 .dashboard {
@@ -66,23 +61,24 @@ header {
     align-items: center;
     margin-bottom: 30px;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
+    border: 2px solid black;
 }
 
 .btn {
     text-decoration: none;
     color: white;
-    background-color: #fc0b03;  
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    background-color: #c52a3a;
+    padding: 8px 15px;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-family: Georgia, sans-serif;
 }
 
 .btn:hover {
-    background-color: #218838; 
+    background-color: #861823;
 }
 
 table {
@@ -90,89 +86,73 @@ table {
     border-collapse: collapse;
     margin-bottom: 30px;
     background-color: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid black;
 }
 
 th, td {
-    padding: 16px;
+    padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    border: 1px solid black;
 }
 
 th {
-    background-color: #e9ecef; 
+    background-color: #a6c5ab;
     font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
 
 td {
-    background-color: #ffffff;
+    background-color: #e3efe5;
 }
 
 .alert {
     color: #721c24;
     background-color: #f8d7da;
-    padding: 12px;
-    margin: 12px 0;
-    border-radius: 8px;
-    border-left: 5px solid #f5c2c7;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
 }
 
 #teacher-courses-title {
-    color: #0056b3; 
+    color: white;
     font-weight: bold;
-    font-size: 32px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); 
-    text-align: center;
+    font-size: 30px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 1.5);
 }
-
 .course-section {
     background-color: white;
     padding: 20px;
     margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border: none;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid black;
 }
 
 .full {
-    color: #dc3545; 
+    color: #dc3545;
     font-weight: bold;
 }
 
 h2 {
-    color: #444;
-    font-size: 24px;
+    color: #333;
     margin-top: 30px;
     margin-bottom: 20px;
-    text-align: center;
 }
 
 input[type="number"] {
     width: 80px;
     margin-right: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    transition: border-color 0.3s ease;
-}
-
-input[type="number"]:focus {
-    border-color: #007bff;
 }
 
 .grade-form {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .grade-form button {
-    padding: 10px 14px;
+    padding: 5px 10px;
     font-size: 14px;
-    border-radius: 6px;
-    font-weight: bold;
-}
+}  
+
