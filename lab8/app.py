@@ -6,6 +6,7 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.form import Select2Widget
 from wtforms import SelectField, PasswordField, StringField
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
@@ -22,7 +23,7 @@ login_manager.login_view = 'login'
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)  # Remember we removed password_hash
+    password_hash = db.Column(db.String(120), nullable=False)
     role = db.Column(db.String(20), nullable=False)
     display_name = db.Column(db.String(100))
 
@@ -64,7 +65,7 @@ def index():
 def login():
     if request.method == 'POST':
         user = User.query.filter_by(username=request.form['username']).first()
-        if user and user.password == request.form['password']:
+        if user and check_password_hash(user.password_hash, request.form['password']):
             login_user(user)
             return redirect(url_for('dashboard'))
         flash('Invalid username or password')
@@ -174,29 +175,9 @@ class ChildView(ModelView):
     
 class UserView(ModelView):
     column_display_pk = True
-    column_list = ('id', 'username', 'role', 'display_name')
+    column_list = ('id', 'username', 'password_hash', 'role', 'display_name')
     
     # Explicitly define the form
-    form_columns = ('username', 'password', 'role', 'display_name')
-    
-    # Override the form field types
-    form_overrides = {
-        'role': SelectField,
-        'password': PasswordField,
-        'username': StringField,
-        'display_name': StringField
-    }
-    
-    # Define the choices for the role field
-    form_args = {
-        'role': {
-            'choices': [
-                ('student', 'Student'),
-                ('teacher', 'Teacher'),
-                ('admin', 'Admin')
-            ]
-        }
-    }
     
     def is_accessible(self):
         return current_user.is_authenticated and current_user.role == 'admin'
@@ -268,7 +249,7 @@ def init_db():
         if not User.query.filter_by(username=user_data['username']).first():
             user = User(
                 username=user_data['username'],
-                password=user_data['password'],
+                password_hash=generate_password_hash(user_data['password']),
                 role=user_data['role'],
                 display_name=user_data['display_name']
             )
