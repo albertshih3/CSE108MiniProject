@@ -4,12 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_admin import Admin 
 from flask_admin.contrib.sqla import ModelView
-from flask_admin.form import Select2Widget
-from wtforms import SelectField, PasswordField, StringField
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key'
+app.config['SECRET_KEY'] = 'totallysecret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///enrollment.db'
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
