@@ -182,7 +182,7 @@ class UserView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated and current_user.role == 'admin'
 
-admin = Admin(app, name='ACME University Admin', template_mode='bootstrap4')
+admin = Admin(app, name='ACME University Admin', template_mode='bootstrap3')
 admin.add_view(UserView(User, db.session))
 admin.add_view(AdminModelView(Course, db.session))
 admin.add_view(ChildView(Enrollment, db.session))
