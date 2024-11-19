@@ -17,28 +17,6 @@ login_manager.login_view = 'login'
 ## End of import statements ##
 
 ## Database Models ##
-# ChildView class for displaying child models in Flask-Admin
-class ChildView(ModelView):
-    column_display_pk = True
-    column_hide_backrefs = False
-    column_list = ('course_id', 'course_name', 'student_id', 'student_name', 'grade')
-    column_labels = {
-        'course_name': 'Course Name',
-        'student_name': 'Student Name',
-        'grade': 'Grade'
-    }
-    form_columns = ('course_id', 'student_id', 'grade')
-
-    def _course_name_formatter(view, context, model, name):
-        return model.course.name
-
-    def _student_name_formatter(view, context, model, name):
-        return model.student.display_name
-
-    column_formatters = {
-        'course_name': _course_name_formatter,
-        'student_name': _student_name_formatter
-    }
     
 # User database model
 class User(UserMixin, db.Model):
@@ -168,6 +146,32 @@ class AdminModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated and current_user.role == 'admin'
     
+# ChildView class for displaying child models in Flask-Admin
+class ChildView(ModelView):
+    column_display_pk = True
+    column_hide_backrefs = False
+    column_list = ('course_id', 'course_name', 'student_id', 'student_name', 'grade')
+    column_labels = {
+        'course_name': 'Course Name',
+        'student_name': 'Student Name',
+        'grade': 'Grade'
+    }
+    form_columns = ('course_id', 'student_id', 'grade')
+
+    def _course_name_formatter(view, context, model, name):
+        return model.course.name
+
+    def _student_name_formatter(view, context, model, name):
+        return model.student.display_name
+
+    column_formatters = {
+        'course_name': _course_name_formatter,
+        'student_name': _student_name_formatter
+    }
+    
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.role == 'admin'
+    
 class UserView(ModelView):
     column_display_pk = True
     column_list = ('id', 'username', 'role', 'display_name')
@@ -199,7 +203,7 @@ class UserView(ModelView):
 
 admin = Admin(app, name='ACME University Admin', template_mode='bootstrap4')
 admin.add_view(UserView(User, db.session))
-admin.add_view(ModelView(Course, db.session))
+admin.add_view(AdminModelView(Course, db.session))
 admin.add_view(ChildView(Enrollment, db.session))
 
 def init_db():
